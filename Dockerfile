@@ -22,9 +22,6 @@ COPY . .
 # Create logs directory
 RUN mkdir -p logs
 
-# Non-root user for safety
-RUN useradd -m botuser && chown -R botuser:botuser /app
-USER botuser
-
+# Container will run as root to avoid volume mount permission issues
 # Default command: run daily scheduler
 CMD ["python", "scheduler/run_bot.py"]
