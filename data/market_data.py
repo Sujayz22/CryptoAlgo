@@ -29,6 +29,16 @@ RESOLUTION_MAP = {
     "1D": "1d",
 }
 
+# Mapping of resolutions to seconds for timestamp calculation
+RESOLUTION_SECONDS = {
+    "1m": 60,
+    "5m": 300,
+    "15m": 900,
+    "1h": 3600,
+    "4h": 14400,
+    "1D": 86400,
+}
+
 
 def get_candles(symbol: str, resolution: str = RESOLUTION, limit: int = CANDLE_LIMIT) -> pd.DataFrame:
     """
@@ -47,12 +57,18 @@ def get_candles(symbol: str, resolution: str = RESOLUTION, limit: int = CANDLE_L
         RuntimeError: if the API call fails after MAX_RETRIES attempts.
     """
     res = RESOLUTION_MAP.get(resolution, "1d")
+    res_seconds = RESOLUTION_SECONDS.get(resolution, 86400)
     url = f"{DELTA_BASE_URL}/v2/history/candles"
+
+    end_time = int(time.time())
+    start_time = end_time - (limit * res_seconds)
 
     params = {
         "resolution": res,
         "symbol": symbol,
         "limit": limit,
+        "start": start_time,
+        "end": end_time,
     }
 
     logger.info(f"Fetching {limit} {resolution} candles for {symbol} …")
