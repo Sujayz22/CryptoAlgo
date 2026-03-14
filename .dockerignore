@@ -1,0 +1,16 @@
+.env
+.git/
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+logs/*.log
+*.egg-info/
+dist/
+build/
+.DS_Store
+agents.md
+rules.md
+tasks.md
