@@ -9,7 +9,7 @@ import requests
 import pandas as pd
 
 from config.settings import (
-    DELTA_BASE_URL,
+    DELTA_DATA_URL,
     CANDLE_LIMIT,
     RESOLUTION,
     MAX_RETRIES,
@@ -58,7 +58,7 @@ def get_candles(symbol: str, resolution: str = RESOLUTION, limit: int = CANDLE_L
     """
     res = RESOLUTION_MAP.get(resolution, "1d")
     res_seconds = RESOLUTION_SECONDS.get(resolution, 86400)
-    url = f"{DELTA_BASE_URL}/v2/history/candles"
+    url = f"{DELTA_DATA_URL}/v2/history/candles"
 
     end_time = int(time.time())
     start_time = end_time - (limit * res_seconds)

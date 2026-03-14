@@ -20,6 +20,11 @@ DELTA_BASE_URL: str = os.getenv(
     "DELTA_BASE_URL", "https://cdn-ind.testnet.deltaex.org"
 )
 
+# Endpoint for fetching historical market data (use live URL for longer history)
+DELTA_DATA_URL: str = os.getenv(
+    "DELTA_DATA_URL", "https://api.delta.exchange"
+)
+
 # ── Trading Mode ──────────────────────────────────────────────────────────────
 
 # Set PAPER_MODE=True to run without placing real orders
