@@ -11,6 +11,7 @@ RUN pip install --no-cache-dir --prefix=/install -r requirements.txt
 FROM python:3.12-slim
 
 WORKDIR /app
+ENV PYTHONPATH="/app"
 
 # Copy installed packages from builder
 COPY --from=builder /install /usr/local
